@@ -1,0 +1,36 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: start;
+}
+
+.number-container {
+    display: flex;
+    gap: 32px;
+}
+
+img {
+    width: 100px;
+    height: 100px;
+}
+
+button {
+    padding: 4px 8px;
+    font-size: 16px;
+    cursor: pointer;
+}
