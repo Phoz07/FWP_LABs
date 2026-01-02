@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab4 - Money Tracker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <section>
+            <h1>ตารางรายรับ-รายจ่าย</h1>
+            <h3>ยอดคงเหลือ</h3>
+            <h1 id="balance">0</h1>
+            <form>
+                <input type="text" placeholder="รายการ">
+                <input type="text" placeholder="จำนวน">
+                <select name="type">
+                    <option value="income">รายรับ</option>
+                    <option value="expense">รายจ่าย</option>
+                </select>
+                <input type="date" placeholder="mm/dd/yyyy">
+                <button id="addButton">เพิ่มรายการ</button>
+            </form>
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>วันที่</th>
+                        <th>รายการ</th>
+                        <th>รายรับ</th>
+                        <th>รายจ่าย</th>
+                    </tr>
+                </thead>
+                <tbody id="table-body">
+                </tbody>
+            </table>
+        </section>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
