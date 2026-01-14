@@ -12,7 +12,7 @@ const renderFoodCatalog = (data) => {
       "bg-white/20 backdrop-blur-md rounded-md border-1 border-gray-100 p-8 space-y-4 shadow-md hover:scale-105 transition-transform cursor-pointer";
 
     const foodImage = document.createElement("img");
-    foodImage.className = "rounded-md";
+    foodImage.className = "rounded-md aspect-video object-cover";
     foodImage.src = food.imageUrl;
     foodImage.alt = food.name;
 
@@ -86,6 +86,17 @@ const renderFoodCatalog = (data) => {
         methodsList.appendChild(stepElement);
       }
       modalContent.appendChild(methodsList);
+
+      const refTitleElement = document.createElement("h3");
+      refTitleElement.className = "text-xl font-semibold mt-4 mb-2";
+      refTitleElement.textContent = "อ้างอิง";
+      modalContent.appendChild(refTitleElement);
+
+      const refElement = document.createElement("a");
+      refElement.className = "text-blue-500 hover:underline";
+      refElement.href = food.ref;
+      refElement.textContent = food.ref;
+      modalContent.appendChild(refElement);
 
       modalContent.appendChild(closeButton);
       modal.appendChild(modalContent);
