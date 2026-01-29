@@ -1,61 +1,90 @@
 const handleFetchData = () => {
   const data = localStorage.getItem("movies");
-  return JSON.parse(data);
+  return data ? JSON.parse(data) : [];
+};
+
+const renderMovies = () => {
+  const movieList = document.getElementById("movie-list");
+  const moviesData = handleFetchData();
+
+  while (movieList.firstChild) {
+    movieList.removeChild(movieList.firstChild);
+  }
+
+  if (moviesData.length === 0) {
+    const noMoviesBanner = document.createElement("div");
+    noMoviesBanner.className = "no-movies-banner";
+
+    const noMoviesText = document.createElement("h1");
+    const textNode = document.createTextNode("ยังไม่มีรายการโปรด");
+    noMoviesText.appendChild(textNode);
+
+    noMoviesBanner.appendChild(noMoviesText);
+    movieList.appendChild(noMoviesBanner);
+  } else {
+    moviesData.forEach((movieName, index) => {
+      const itemDiv = document.createElement("div");
+      itemDiv.className = "movie-item";
+      itemDiv.style.display = "flex";
+      itemDiv.style.justifyContent = "space-between";
+      itemDiv.style.alignItems = "center";
+      itemDiv.style.padding = "10px";
+      itemDiv.style.borderBottom = "1px solid #eee";
+
+      const span = document.createElement("span");
+      const movieText = document.createTextNode(movieName);
+      span.appendChild(movieText);
+
+      const deleteBtn = document.createElement("button");
+      const btnText = document.createTextNode("ลบ");
+      deleteBtn.appendChild(btnText);
+      deleteBtn.style.backgroundColor = "#ff4d4d";
+
+      deleteBtn.addEventListener("click", () => {
+        handleDeleteData(index);
+      });
+
+      itemDiv.appendChild(span);
+      itemDiv.appendChild(deleteBtn);
+      movieList.appendChild(itemDiv);
+    });
+  }
 };
 
 const handleAddData = () => {
-  const name = document.getElementById("name-input");
-  if (!name) {
-    alert("กรุณาใส่ชื่อ");
+  const nameInput = document.getElementById("name-input");
+  const nameValue = nameInput.value.trim();
+
+  if (nameValue === "") {
+    alert("กรุณาใส่ชื่อภาพยนตร์");
     return;
   }
+
   const oldData = handleFetchData();
-  let newData = [];
-  if (oldData) {
-    newData = [...oldData, name];
-  } else {
-    newData = [name];
-  }
+  const newData = [...oldData, nameValue];
+
   localStorage.setItem("movies", JSON.stringify(newData));
+  nameInput.value = "";
+  renderMovies();
 };
 
-const handleDeleteData = () => {
-  const name = document.getElementById("name-input");
-  if (!name) {
-    alert("กรุณาใส่ชื่อ");
-    return;
-  }
+const handleDeleteData = (index) => {
   const oldData = handleFetchData();
-  const newData = oldData.filter((item) => item != name);
-  localStorage.setItem("movies", newData);
+  const newData = oldData.filter((_, i) => i !== index);
+  localStorage.setItem("movies", JSON.stringify(newData));
+  renderMovies();
 };
 
 const handleClearData = () => {
-  localStorage.clear("movies");
+  if (confirm("คุณต้องการลบรายการทั้งหมดใช่หรือไม่?")) {
+    localStorage.removeItem("movies");
+    renderMovies();
+  }
 };
 
-document
-  .getElementById("add-button")
-  .addEventListener("click", () => handleAddData());
-
-// document
-//   .getElementById("delete-button")
-//   .addEventListener("click", () => handleDeleteData());
-
+document.getElementById("add-button").addEventListener("click", handleAddData);
 document
   .getElementById("clear-button")
-  .addEventListener("click", () => handleClearData());
+  .addEventListener("click", handleClearData);
 
-const movieList = document.getElementById("movie-list");
-const moviesData = handleFetchData();
-
-if (!moviesData) {
-  const noMoviesBanner = document.createElement("div");
-  noMoviesBanner.className = "no-movies-banner";
-
-  const noMoviesText = document.createElement("h1");
-  noMoviesText.textContent = "ยังไม่มีรายการโปรด";
-
-  noMoviesBanner.appendChild(noMoviesText);
-  movieList.appendChild(noMoviesBanner);
-}
+renderMovies();
