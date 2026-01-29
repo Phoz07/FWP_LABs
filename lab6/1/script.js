@@ -18,8 +18,8 @@ const renderTable = (data) => {
     const row = document.createElement("tr");
     row.innerHTML = `
       <td>${employee.id}</td>
-      <td>${employee.Gender}</td>
       <td>${employee.FirstName} ${employee.LastName}</td>
+      <td>${employee.Gender === "Male" ? "M" : "F"}</td>
       <td>${employee.Position}</td>
       <td>${employee.Address}</td>
     `;
@@ -28,5 +28,5 @@ const renderTable = (data) => {
 };
 
 window.onload = () => {
-  renderTable(handleFetch());
+  handleFetch();
 };

@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Movie & Series List</title>
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+        <div class="container">
+            <section id="card-container">
+                <div class="card">
+                    <h1>รายการภาพยนต์/ซีรีส์โปรด</h1>
+                    <div class="input-container">
+                        <input
+                            placeholder="ชื่อภาพยนต์หรือซีรีส์..."
+                            type="text"
+                            id="name-input"
+                        />
+                        <button id="add-button" class="add-button">
+                            เพิ่ม
+                        </button>
+                    </div>
+                    <div class="clear-button-container">
+                        <button id="clear-button" class="clear-button">
+                            ลบทั้งหมด
+                        </button>
+                    </div>
+                    <div id="movie-list"></div>
+                </div>
+            </section>
+        </div>
+        <script src="script.js"></script>
+    </body>
+</html>
