@@ -49,3 +49,8 @@ body {
     text-align: center;
     margin-top: 24px;
 }
+
+.panda-logo {
+    height: 300px;
+    object-fit: cover;
+}

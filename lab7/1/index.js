@@ -21,8 +21,14 @@ app
   })
   .get("/birds", function (req, res) {
     res.sendFile(path.join(__dirname, "/public/birds.html"));
+  })
+  .get("/aliens", function (req, res) {
+    res.sendFile(path.join(__dirname, "/public/aliens.html"));
+  })
+  .get("/not-found", function (req, res) {
+    res.sendFile(path.join(__dirname, "public/404.html"));
   });
 
 app.listen(port, () => {
-  console.log(`Listening on 127.0.0.1:${port}`);
+  console.log(`Listening on http://127.0.0.1:${port}`);
 });
