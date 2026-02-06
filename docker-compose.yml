@@ -1,0 +1,21 @@
+version: "3.8"
+
+services:
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: phpmyadmin
+    environment:
+      PMA_HOST: webdev.it.kmitl.ac.th
+      PMA_PORT: 3306
+      PMA_USER: s67070174
+      PMA_PASSWORD: HEZ51XCO86P
+      UPLOAD_LIMIT: 300M
+    ports:
+      - "8080:80"
+    restart: unless-stopped
+    networks:
+      - mysql-network
+
+networks:
+  mysql-network:
+    driver: bridge
