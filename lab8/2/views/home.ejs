@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Users</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .content-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 40px;
+            min-height: 100vh;
+        }
+
+        h1 {
+            color: #333;
+            font-size: 36px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+            width: 100%;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-header {
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 20px;
+            margin-bottom: 28px;
+        }
+
+        .card-header h2 {
+            color: #007bff;
+            font-size: 28px;
+            margin-bottom: 4px;
+        }
+
+        .card-header p {
+            color: #666;
+            font-size: 16px;
+        }
+
+        .card-body {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .info-row {
+            display: flex;
+            gap: 12px;
+            font-size: 18px;
+        }
+
+        .info-label {
+            font-weight: 600;
+            color: #555;
+            min-width: 140px;
+        }
+
+        .info-value {
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="content-container">
+            <h1>User Data</h1>
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>User id: <%= user.id %></h2>
+                        </div>
+                        <div class="card-body">
+                            <div class="info-row">
+                                <span class="info-label">Username:</span>
+                                <span class="info-value"><%= user.username %></span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Password:</span>
+                                <span class="info-value"><%= user.password %></span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Email:</span>
+                                <span class="info-value"><%= user.email %></span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">FirstName:</span>
+                                <span class="info-value"><%= user.firstname %></span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">LastName:</span>
+                                <span class="info-value"><%= user.lastname %></span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Age:</span>
+                                <span class="info-value"><%= user.age %> years</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Phone:</span>
+                                <span class="info-value"><%= user.phone %></span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Address:</span>
+                                <span class="info-value"><%= user.address %></span>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+    </div>
+</body>
+</html>

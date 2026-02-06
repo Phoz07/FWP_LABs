@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .content-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            gap: 24px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 24px;
+            border: 1px solid #ccc;
+            border-radius: 12px;
+        }
+
+        form label {
+            margin-bottom: 8px;
+        }
+
+        form input,
+        form button {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        form button {
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        form button:hover {
+            background-color: #0056b3;
+        }
+
+        h1 {
+            margin-bottom: 24px;
+        }
+
+        h2 {
+            color: red;
+        }
+
+        ul {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="content-container">
+            <form action="/login" method="POST">
+                <h1>Login Form</h1>
+                <label for="username">UserName or Email:</label>
+                <input type="text" id="username" name="username" placeholder="Your username or email" required>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" placeholder="your password" required>
+                <button type="submit">Login</button>
+            </form>
+            <div>
+                <h2>**ให้ผู้ตรวจ login ด้วย credentials ต่อไปนี้ ถ้าไม่ login จะดู data ไม่ได้**</h2>
+                <ul>
+                    <li>UseName: admin</li>
+                    <li>Email: admin@gmail.com</li>
+                    <li>Password: admin123</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
