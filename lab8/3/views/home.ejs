@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Albums</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .content-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 128px 0;
+        }
+
+        .card-container {
+            max-width: fit-content;
+            width: 100%;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .card {
+            width: 300px;
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background-color: #fff;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .card-text {
+            padding: 24px;
+        }
+
+        h1 {
+            font-size: 64px;
+            margin-bottom: 24px;
+            color: #333;
+        }
+
+        .card h2 {
+            font-size: 20px;
+            margin-bottom: 4px;
+        }
+
+        .card p {
+            margin-bottom: 6px;
+            color: #666;
+            font-size: 0.95rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="content-container">
+                <h1>The most popular albums</h1>
+                <div class="card-container">
+                    <% albums.forEach(album => { %>
+                        <div class="card">
+                            <img src="<%= album.album_cover %>" alt="<%= album.title %> Cover" class="card-img">
+                            <div class="card-text">
+                                <h2><%= album.song %></h2>
+                                <p>Album: <%= album.album %> (<%= album.year %>)</p>
+                                <p>Artist: <%= album.artist %></p>
+                                <p>Genre: <%= album.genre %></p>
+                            </div>
+                        </div>
+                    <% }); %>
+                </div>
+        </div>
+    </div>
+</body>
+</html>
