@@ -53,7 +53,7 @@ app
     }
   })
   .get("/form", (req, res) => {
-    res.render("form");
+    res.render("form", { error: null });
   })
   .post("/login", (req, res) => {
     try {
@@ -62,21 +62,18 @@ app
       conn.query(sql, [username, username], (error, results) => {
         if (error) {
           console.error("Query error:", error);
-          return res.status(500).json({
-            status: "ERROR",
-            message: "Database query failed",
+          return res.render("form", {
+            error: "Database query failed. Please try again.",
           });
         }
         if (results.length === 0) {
-          return res.status(401).json({
-            status: "ERROR",
-            message: "Invalid username or email",
+          return res.render("form", {
+            error: "ไม่พบ username หรือ email นี้ในระบบ",
           });
         }
         if (results[0].password !== password) {
-          return res.status(401).json({
-            status: "ERROR",
-            message: "Invalid password",
+          return res.render("form", {
+            error: "password ไม่ถูกต้อง",
           });
         }
         res.cookie("userId", results[0].id, {
@@ -88,9 +85,8 @@ app
       });
     } catch (error) {
       console.error("Unexpected error:", error);
-      res.status(500).json({
-        status: "ERROR",
-        message: "Unknown error",
+      res.render("form", {
+        error: "Unknown error occurred. Please try again.",
       });
     }
   });

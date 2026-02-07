@@ -12,6 +12,10 @@
             font-family: Arial, Helvetica, sans-serif;
         }
 
+        body {
+            background-color: #f5f5f5;
+        }
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -34,28 +38,40 @@
             width: 100%;
             max-width: 400px;
             margin: 0 auto;
-            padding: 24px;
-            border: 1px solid #ccc;
+            padding: 32px;
+            background: white;
+            border: 1px solid #e0e0e0;
             border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
 
         form label {
             margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
         }
 
         form input,
         form button {
             width: 100%;
-            padding: 8px;
+            padding: 12px;
             margin-bottom: 16px;
             border: 1px solid #ccc;
-            border-radius: 4px;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        form input:focus {
+            outline: none;
+            border-color: #007bff;
         }
 
         form button {
             background-color: #007bff;
             color: #fff;
             cursor: pointer;
+            font-weight: 600;
+            margin-top: 8px;
         }
 
         form button:hover {
@@ -64,14 +80,44 @@
 
         h1 {
             margin-bottom: 24px;
+            color: #333;
+            text-align: center;
         }
 
-        h2 {
-            color: red;
+        .error-message {
+            background-color: #fee;
+            border: 1px solid #fcc;
+            border-radius: 6px;
+            padding: 12px;
+            margin-bottom: 16px;
+            color: #c33;
+            font-size: 14px;
+            text-align: center;
         }
 
-        ul {
-            color: red;
+        .info-box {
+            background: white;
+            border: 2px solid #ffc107;
+            border-radius: 12px;
+            padding: 24px;
+            max-width: 500px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .info-box h2 {
+            color: #ff6b00;
+            margin-bottom: 16px;
+            font-size: 18px;
+        }
+
+        .info-box ul {
+            color: #333;
+            list-style-position: inside;
+            line-height: 1.8;
+        }
+
+        .info-box li {
+            font-size: 14px;
         }
     </style>
 </head>
@@ -80,16 +126,26 @@
         <div class="content-container">
             <form action="/login" method="POST">
                 <h1>Login Form</h1>
-                <label for="username">UserName or Email:</label>
+
+                <% if (error) { %>
+                    <div class="error-message">
+                        <%= error %>
+                    </div>
+                <% } %>
+
+                <label for="username">Username or Email:</label>
                 <input type="text" id="username" name="username" placeholder="Your username or email" required>
+
                 <label for="password">Password:</label>
-                <input type="password" id="password" name="password" placeholder="your password" required>
+                <input type="password" id="password" name="password" placeholder="Your password" required>
+
                 <button type="submit">Login</button>
             </form>
-            <div>
-                <h2>**ให้ผู้ตรวจ login ด้วย credentials ต่อไปนี้ ถ้าไม่ login จะดู data ไม่ได้**</h2>
+
+            <div class="info-box">
+                <h2>**ให้ผู้ตรวจ login ด้วย credentials ต่อไปนี้**</h2>
                 <ul>
-                    <li>UseName: admin</li>
+                    <li>Username: admin</li>
                     <li>Email: admin@gmail.com</li>
                     <li>Password: admin123</li>
                 </ul>
