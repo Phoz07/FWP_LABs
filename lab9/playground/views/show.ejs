@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Welcome to Panda Company</title>
+    <link rel="stylesheet" href="/styles/show.css">
+</head>
+
+<body>
+    <%- include("head") %>
+    <body>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Address</th>
+                <th>Salary</th>
+            </tr>
+        </thead>
+        <tbody>
+        <% data.map((item)=>{ %>
+            <tr>
+                <td><%=item.EmployeeId%></td>
+                <td><%=item.FirstName%></td>
+                <td><%=item.LastName%></td>
+                <td><%=item.Title%></td>
+                <td><%=item.Phone%></td>
+                <td><%=item.Email%></td>
+            </tr>
+        <% }); %>
+        </tbody>
+    </table>
+
+    </body>
+    <%- include("footer") %>
+</body>
+
+</html>

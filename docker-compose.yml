@@ -1,21 +1,37 @@
+# version: "3.8"
+
+# services:
+#   phpmyadmin:
+#     image: phpmyadmin/phpmyadmin:latest
+#     container_name: phpmyadmin
+#     environment:
+#       PMA_HOST: webdev.it.kmitl.ac.th
+#       PMA_PORT: 3306
+#       PMA_USER: s67070174
+#       PMA_PASSWORD: HEZ51XCO86P
+#       UPLOAD_LIMIT: 300M
+#     ports:
+#       - "8080:80"
+#     restart: unless-stopped
+#     networks:
+#       - mysql-network
+
+# networks:
+#   mysql-network:
+#     driver: bridge
+
 version: "3.8"
 
 services:
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin:latest
-    container_name: phpmyadmin
-    environment:
-      PMA_HOST: webdev.it.kmitl.ac.th
-      PMA_PORT: 3306
-      PMA_USER: s67070174
-      PMA_PASSWORD: HEZ51XCO86P
-      UPLOAD_LIMIT: 300M
+  sqlite-web:
+    image: coleifer/sqlite-web
+    container_name: sqlite-web
     ports:
-      - "8080:80"
-    restart: unless-stopped
-    networks:
-      - mysql-network
-
-networks:
-  mysql-network:
-    driver: bridge
+      - "8080:8080"
+    volumes:
+      - ./:/data
+    # -------------------------------------------------------
+    # จุดที่แก้ไข: ต้องเรียก sqlite_web และระบุ Host IP ด้วย
+    # อย่าลืมเปลี่ยน 'mydb.db' เป็นชื่อไฟล์จริงของคุณ
+    # -------------------------------------------------------
+    command: sqlite_web -H 0.0.0.0 -p 8080 /data/mydb.db
