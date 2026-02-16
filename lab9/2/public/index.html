@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Quiz!</title>
+        <link rel="stylesheet" href="/styles/global.css" />
+    </head>
+    <body>
+        <div class="container">
+            <div class="quiz-container">
+                <h1>Questions</h1>
+                <div id="questions"></div>
+            </div>
+        </div>
+        <script>
+            const handleFetchQUestions = async () => {
+                try {
+                    const response = await fetch(
+                        "http://localhost:3000/api/questions",
+                    );
+                    const data = await response.json();
+                    const questionsContainer =
+                        document.getElementById("questions");
+
+                    data.questions.map((q) => {
+                        const questionDiv = document.createElement("div");
+                        questionDiv.classList.add("question");
+
+                        const h2 = document.createElement("h2");
+                        h2.textContent = `${q.id}. ${q.question}`;
+
+                        const labels = ["A", "B", "C", "D"];
+                        const radioGroup = document.createElement("div");
+                        radioGroup.classList.add("radio-group");
+
+                        q.choices.forEach((choice, index) => {
+                            const label = document.createElement("label");
+
+                            const radio = document.createElement("input");
+                            radio.type = "radio";
+                            radio.name = `question-${q.id}`;
+                            radio.value = labels[index];
+
+                            label.appendChild(radio);
+                            label.appendChild(
+                                document.createTextNode(
+                                    ` ${labels[index]}. ${choice}`,
+                                ),
+                            );
+
+                            radioGroup.appendChild(label);
+                        });
+
+                        questionDiv.appendChild(h2);
+                        questionDiv.appendChild(radioGroup);
+                        questionsContainer.appendChild(questionDiv);
+                    });
+                } catch (error) {
+                    console.log(error);
+                }
+            };
+            handleFetchQUestions();
+        </script>
+    </body>
+</html>
