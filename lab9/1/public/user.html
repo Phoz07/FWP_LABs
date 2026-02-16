@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>User Details</title>
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+            crossorigin="anonymous"
+        />
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+            crossorigin="anonymous"
+        ></script>
+        <link rel="stylesheet" href="/styles/global.css" />
+    </head>
+    <body>
+        <div class="container">
+            <div class="card-container">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">User Details</h5>
+                        <p class="card-text" id="userId"></p>
+                        <p class="card-text" id="firstName"></p>
+                        <p class="card-text" id="lastName"></p>
+                        <p class="card-text" id="username"></p>
+                        <p class="card-text" id="email"></p>
+                        <a href="/" class="btn btn-link">Back to Users List</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            const userId = window.location.pathname.split("/").pop();
+
+            const handleFetchUser = async () => {
+                const response = await fetch(
+                    `http://localhost:3000/api/users/${userId}`,
+                );
+                const user = await response.json();
+                document.querySelector("#userId").textContent =
+                    `#ID: ${user.id}`;
+                document.querySelector("#firstName").textContent =
+                    `First Name: ${user.first_name}`;
+                document.querySelector("#lastName").textContent =
+                    `Last Name: ${user.last_name}`;
+                document.querySelector("#username").textContent =
+                    `Username: ${user.username}`;
+                document.querySelector("#email").textContent =
+                    `Email: ${user.email}`;
+            };
+            handleFetchUser();
+        </script>
+    </body>
+</html>
