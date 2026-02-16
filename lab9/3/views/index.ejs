@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ระบบติดตามการสั่งซื้อ</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/styles/global.css">
+</head>
+<body>
+    <div class="container">
+        <div class="form-container">
+            <h1>ระบบติดตามการสั่งซื้อ</h1>
+            <form action="/api/order" method="POST">
+              <div class="row g-3 align-items-end">
+                <div class="col">
+                  <label for="customerName" class="form-label">ชื่อลูกค้า</label>
+                  <input type="text" class="form-control" id="customer" name="customer" placeholder="กรอกชื่อลูกค้า" required>
+                </div>
+                <div class="col">
+                  <label for="productName" class="form-label">รายการสินค้า</label>
+                  <input type="text" class="form-control" id="product" name="product" placeholder="กรอกรายการสินค้า" required>
+                </div>
+                <div class="col">
+                  <label for="address" class="form-label">ที่อยู่</label>
+                  <input type="text" class="form-control" id="address" name="address" placeholder="กรอกที่อยู่" required>
+                </div>
+                <div class="col">
+                  <label for="phone" class="form-label">เบอร์โทรศัพท์</label>
+                  <input type="text" class="form-control" id="phone" name="phone" placeholder="กรอกเบอร์โทรศัพท์" required>
+                </div>
+                <div class="col-auto">
+                  <button type="submit" class="btn btn-success">เพิ่มสินค้า</button>
+                </div>
+              </div>
+            </form>
+            <%- include('productTable') %>
+        </div>
+    </div>
+</body>
+</html>

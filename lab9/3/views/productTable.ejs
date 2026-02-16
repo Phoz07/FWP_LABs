@@ -1,0 +1,52 @@
+<div class="table-container">
+    <h2>รายการสั่งซื้อ</h2>
+    <table class="table table-striped">
+        <thead class="table-striped">
+            <tr>
+                <th>ID</th>
+                <th>ชื่อลูกค้า</th>
+                <th>รายการสินค้า</th>
+                <th>สถานะ</th>
+                <th>เปลี่ยนสถานะ</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% if (orders && orders.length > 0) { %>
+                <% orders.forEach(order => { %>
+                    <tr>
+                        <td><%= order.id %></td>
+                        <td><%= order.customer %></td>
+                        <td><%= order.product %></td>
+                        <td>
+                            <% if (order.state === 'รอดำเนินการ') { %>
+                                <span class="badge bg-warning text-dark"><%= order.state %></span>
+                            <% } else if (order.state === 'กำลังจัดส่ง') { %>
+                                <span class="badge bg-info text-dark"><%= order.state %></span>
+                            <% } else if (order.state === 'จัดส่งแล้ว') { %>
+                                <span class="badge bg-success"><%= order.state %></span>
+                            <% } else if (order.state === 'ยกเลิก') { %>
+                                <span class="badge bg-danger"><%= order.state %></span>
+                            <% } else { %>
+                                <span class="badge bg-secondary"><%= order.state %></span>
+                            <% } %>
+                        </td>
+                        <td>
+                            <form method="GET" action="/api/order/<%= order.id %>" class="d-flex gap-2 align-items-center">
+                                <select name="state" class="form-select form-select-sm">
+                                    <option value="รอดำเนินการ" <%= order.state === 'รอดำเนินการ' ? 'selected' : '' %>>รอดำเนินการ</option>
+                                    <option value="กำลังจัดส่ง" <%= order.state === 'กำลังจัดส่ง' ? 'selected' : '' %>>กำลังจัดส่ง</option>
+                                    <option value="จัดส่งแล้ว" <%= order.state === 'จัดส่งแล้ว' ? 'selected' : '' %>>จัดส่งแล้ว</option>
+                                </select>
+                                <button type="submit" class="btn btn-primary btn-sm">ยืนยัน</button>
+                            </form>
+                        </td>
+                    </tr>
+                <% }) %>
+            <% } else { %>
+                <tr>
+                    <td colspan="5" class="text-center text-muted">ไม่มีรายการสั่งซื้อ</td>
+                </tr>
+            <% } %>
+        </tbody>
+    </table>
+</div>
