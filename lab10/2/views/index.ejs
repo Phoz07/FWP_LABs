@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo App</title>
+    <link rel="stylesheet" href="/styles/global.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="todo-container">
+            <div class="todo-header">
+                <h1>Todo List</h1>
+                <button onclick="window.location.href='/form'" class="add-todo-btn">Add Todo</button>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Title</th>
+                        <th>Deadline</th>
+                        <th>Completed</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% todos.forEach(todo=> { %>
+                        <tr>
+                            <td>
+                                <%= todo.id %>
+                            </td>
+                            <td>
+                                <%= todo.title %>
+                            </td>
+                            <td>
+                                <%= todo.deadline %>
+                            </td>
+                            <td><input type="checkbox" value="<%= todo.is_completed %>" <%=todo.is_completed ? "checked" : "" %> data-id="<%= todo.id %>"></td>
+                        </tr>
+                        <% }) %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script>
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]')
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', () => {
+                const id = checkbox.getAttribute('data-id')
+                const isCompleted = checkbox.checked ? 1 : 0
+                updateTodo(id, isCompleted)
+            })
+        })
+
+        const updateTodo = async (id, isCompleted) => {
+            try {
+                const response = await fetch(`http://localhost:3000/api/update/${id}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ completed: isCompleted })
+                })
+                const data = await response.json()
+                if (data.success) {
+                    location.reload()
+                }
+            } catch (error) {
+                console.error(error)
+            }
+        }
+    </script>
+</body>
+
+</html>

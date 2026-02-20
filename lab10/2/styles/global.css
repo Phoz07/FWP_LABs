@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Geist Mono', monospace;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.todo-container {
+    max-width: 768px;
+    min-height: 100vh;
+    margin: 0 auto;
+    padding: 4rem 0;
+}
+
+.todo-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 2rem;
+}
+
+table th,
+table td {
+    padding: 0.5rem;
+    text-align: center;
+    border-bottom: 1px solid #ccc;
+}
+
+.add-todo-btn {
+    padding: 0.5rem 1rem;
+    background-color: #0dbd50;
+    font-family: 'Geist Mono', monospace;
+    color: white;
+    border: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.add-todo-btn:hover {
+    background-color: #0aa645;
+}
+
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0 auto;
+    padding: 4rem 0;
+}
+
+.input-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.input-container input,
+.input-container textarea {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 0.25rem;
+}
+
+form {
+    max-width: 425px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 2rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.create-todo-btn {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    background-color: #0dbd50;
+    color: #fff;
+    font-family: 'Geist Mono', monospace;
+    transition: background-color 0.2s;
+}
+
+.create-todo-btn:hover {
+    background-color: #0aa645;
+}

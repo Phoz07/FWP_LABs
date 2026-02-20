@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Todo</title>
+    <link rel="stylesheet" href="/styles/global.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="form-container">
+            <form>
+                <h1>Create New Todo</h1>
+                <div class="input-container">
+                    <label>Title</label>
+                    <input type="text" name="title">
+                </div>
+                <div class="input-container">
+                    <label>Description</label>
+                    <textarea name="description"></textarea>
+                </div>
+                <div class="input-container">
+                    <label>Deadline</label>
+                    <input type="date" name="deadline">
+                </div>
+                <button class="create-todo-btn" onclick="submitForm()">Create</button>
+            </form>
+        </div>
+    </div>
+    <script>
+        const submitForm = async () => {
+            try {
+                const response = await fetch("http://localhost:3000/api/todos", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        title: document.querySelector("input[name='title']").value,
+                        description: document.querySelector("textarea[name='description']").value,
+                        deadline: document.querySelector("input[name='deadline']").value
+                    })
+                })
+                if (response.ok) {
+                    window.location.href = "/"
+                } else {
+                    alert("Failed to create todo")
+                }
+            } catch (error) {
+                console.error(error)
+            }
+        }
+    </script>
+</body>
+
+</html>
