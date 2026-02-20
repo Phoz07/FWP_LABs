@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Geist Mono', monospace;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.book-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+table th {
+    background-color: #ccc;
+    color: #fff;
+}
+
+table th,
+table td {
+    border: 1px solid #252525;
+    padding: 1rem;
+    text-align: left;
+}
