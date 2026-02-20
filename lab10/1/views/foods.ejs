@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food List</title>
+    <link rel="stylesheet" href="/styles/global.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="foods-container">
+            <h1>My Products</h1>
+            <div class="foods">
+                <% data.forEach(food=> { %>
+                    <div class="card">
+                        <img src="<%= food.image_url %>" alt="<%= food.name %>" class="card-image">
+                        <h2 class="card-title">
+                            <%= food.name %>
+                        </h2>
+                        <p class="card-description">
+                            <%= food.description %>
+                        </p>
+                        <a href="http://localhost:3000/food/<%= food.product_id %>" class="card-link">Details</a>
+                    </div>
+                <% }) %>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
