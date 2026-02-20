@@ -1,0 +1,16 @@
+<body>
+    <h1>Smartphones</h1>
+    <ul>
+        <% data.forEach((item)=>{ %>
+            <li>
+                <strong>
+                    <%=item.brand%>
+                </strong>
+                <br>
+                <%=item.model%>
+                <br>
+                <%=item.price%>
+            </li>
+            <% }); %>
+    </ul>
+</body>

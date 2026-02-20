@@ -1,0 +1,21 @@
+<head>
+    <link rel="stylesheet" href="/styles/showEmp.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Panda Company</h1>
+        <div class="card-container">
+            <% data.forEach((emp)=> { %>
+                <div class="card">
+                    <img src="http://webdev.it.kmitl.ac.th:4000/emp-images/<%= emp.EmployeeID %>.png"
+                        alt="<%= emp.EmployeeID %>" class="card-image">
+                    <h1 class="card-title">
+                        <%= emp.FirstName %>
+                    </h1>
+                    <a class="card-link" href="/employees/<%= emp.EmployeeID %>">Details</a>
+                </div>
+            <% }) %>
+        </div>
+    </div>
+</body>
