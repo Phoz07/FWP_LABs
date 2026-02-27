@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Geist Mono", monospace;
+            color: #252525;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .form-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 64px auto;
+            gap: 24px;
+            padding: 64px;
+            border: 1px solid #252525;
+            border-radius: 5px;
+            max-width: 600px;
+        }
+
+        form {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .input-container {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #252525;
+            border-radius: 5px;
+        }
+
+        .button-container {
+            display: flex;
+            gap: 16px;
+        }
+
+        button {
+            padding: 8px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        #save {
+            background-color: #4CAF50;
+            color: white;
+
+            &:hover {
+                background-color: #45a049;
+            }
+        }
+
+        #show {
+            background-color: #2196F3;
+            color: white;
+
+            &:hover {
+                background-color: #1976d2;
+            }
+        }
+
+        #clear {
+            background-color: #f44336;
+            color: white;
+
+            &:hover {
+                background-color: #d32f2f;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="form-container">
+            <h1>Employee Information</h1>
+            <form>
+                <div class="input-container">
+                    <label for="customerID">Customer ID:</label>
+                    <input type="text" name="customerID" id="customerID" value="<%= data.CustomerId %>">
+                </div>
+                <div class="input-container">
+                    <label for="firstName">First Name:</label>
+                    <input type="text" name="firstName" id="firstName" value="<%= data.FirstName %>">
+                </div>
+                <div class="input-container">
+                    <label for="lastName">Last Name:</label>
+                    <input type="text" name="lastName" id="lastName" value="<%= data.LastName %>">
+                </div>
+                <div class="input-container">
+                    <label for="email">Email:</label>
+                    <input type="email" name="email" id="email" value="<%= data.Email %>">
+                </div>
+                <div class="input-container">
+                    <label for="phone">Phone:</label>
+                    <input type="tel" name="phone" id="phone" value="<%= data.Phone %>">
+                </div>
+            </form>
+            <div class="button-container">
+                <button id="save">Save Data</button>
+                <button id="show">Show Data</button>
+                <button id="clear">Clear Data</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        const save = document.getElementById("save");
+        const show = document.getElementById("show");
+        const clear = document.getElementById("clear");
+
+        const handleSave = async () => {
+            const customerID = document.getElementById("customerID").value;
+            const firstName = document.getElementById("firstName").value;
+            const lastName = document.getElementById("lastName").value;
+            const email = document.getElementById("email").value;
+            const phone = document.getElementById("phone").value;
+            try {
+                const response = await fetch('http://localhost:3000/save-cookie', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        customerID,
+                        firstName,
+                        lastName,
+                        email,
+                        phone
+                    })
+                })
+                if (!response.ok) {
+                    throw new Error("Network response was not ok");
+                }
+                alert("Data saved successfully");
+            } catch (error) {
+                console.error(error);
+                alert("Internal Server Error");
+            }
+        }
+
+        const handleShow = async () => {
+            try {
+                const response = await fetch('http://localhost:3000/get-cookie');
+                const result = await response.json();
+                if (result.success) {
+                    const data = result.data;
+                    document.getElementById("customerID").value = data.customerID || '';
+                    document.getElementById("firstName").value = data.firstName || '';
+                    document.getElementById("lastName").value = data.lastName || '';
+                    document.getElementById("email").value = data.email || '';
+                    document.getElementById("phone").value = data.phone || '';
+                    alert("Data loaded from cookie");
+                } else {
+                    alert(result.message || 'No data found in cookie');
+                }
+            } catch (error) {
+                console.error(error);
+                alert("Error loading data");
+            }
+        }
+
+        const handleClear = async () => {
+            try {
+                const response = await fetch('http://localhost:3000/clear-cookie', {
+                    method: 'POST'
+                });
+                const result = await response.json();
+                if (result.success) {
+                    document.getElementById("customerID").value = '';
+                    document.getElementById("firstName").value = '';
+                    document.getElementById("lastName").value = '';
+                    document.getElementById("email").value = '';
+                    document.getElementById("phone").value = '';
+                    alert("Data cleared successfully");
+                } else {
+                    alert(result.message || 'Failed to clear data');
+                }
+            } catch (error) {
+                console.error(error);
+                alert("Error clearing data");
+            }
+        }
+
+        save.addEventListener("click", handleSave);
+        show.addEventListener("click", handleShow);
+        clear.addEventListener("click", handleClear);
+    </script>
+</body>
+
+</html>
