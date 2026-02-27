@@ -1,0 +1,20 @@
+<div class="menu-container">
+    <h1>AUNTIE-AUN Restaurant</h1>
+    <div class="card-container">
+        <% data.forEach((item) => { %>
+            <div class="card">
+                <div class="card-image">
+                    <img src="<%= item.image_url %>" alt="">
+                </div>
+                <div class="card-content">
+                    <h2 class="card-title"><%= item.name %></h2>
+                    <p class="card-description"><%= item.description %></p>
+                    <div class="card-footer">
+                        <p class="card-price"><%= item.price %> THB</p>
+                        <button onclick="addToCart('<%= item.product_id %>')">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        <% }) %>
+    </div>
+</div>
