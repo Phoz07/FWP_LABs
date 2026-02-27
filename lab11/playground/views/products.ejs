@@ -1,0 +1,22 @@
+<div class="card-container">
+    <% data.forEach(product=> { %>
+        <div class="card">
+            <div>
+                <img class="card-image" src="http://webdev.it.kmitl.ac.th/phone-images/<%= product.pimage %>"
+                    alt="<%= product.name %>">
+            </div>
+            <div class="card-content">
+                <h2 style="text-align: center;">
+                    <%= product.name %>
+                </h2>
+                <p>Price: <%= product.price %>
+                </p>
+                <p>Storage: <%= product.storage %>
+                </p>
+                <p>Camera: <%= product.camera %>
+                </p>
+                <a href="/add-to-cart/<%= product.id %>" class="button button-outline">Add to Cart</a>
+            </div>
+        </div>
+        <% }) %>
+</div>
